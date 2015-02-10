@@ -9,7 +9,8 @@ public class Maze
     private char wall=' ';
     private char exit='$';
     private char path='#';
-    private char me='z';
+    private char me='i';
+    private char visited='.';
 
     public Maze() 
     {
@@ -39,31 +40,44 @@ public class Maze
 
     public String toString()
     {
-    String s = "[2J\n";
-    for (int y=0;y<maxY;y++)
-      {
-        for (int x=0;x<maxX;x++)
-          s = s +board[x][y];
-        s=s+"\n";
-      }
-    
-    return s;
+	String s = "[2J\n";
+	for (int y=0;y<maxY;y++)
+	    {
+		for (int x=0;x<maxX;x++)
+		    s = s +board[x][y];
+		s=s+"\n";
+	    }
+	//s=s+"\n";
+	return s;
     }
 
 
     public void solve(int x, int y) {
-	if (board[x][y]==wall) {
+
+	try {
+	    Thread.sleep(50);
+	} catch (Exception e) {
+	}
+	if (board[x][y]==wall || board[x][y]==me || board[x][y]==visited) {
 	    return;
 	}
 	if (board[x][y]==exit) {
 	    System.out.println(this);
 	    System.exit(0);
 	}
+	System.out.println(this);
+	board[x][y]=me;
+	solve(x+1,y);
+	solve(x-1,y);
+	solve(x,y-1);
+	solve(x,y+1);
+	board[x][y]=visited;
     }
     public static void main(String[] args){
 	Maze m = new Maze();
 	System.out.println(m);
-	
+	System.out.println(m);
+	m.solve(1,1);
     }
     
 }
