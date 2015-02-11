@@ -11,6 +11,7 @@ public class Maze
     private char path='#';
     private char me='i';
     private char visited='.';
+    private boolean solved=false;
 
     public Maze() 
     {
@@ -55,15 +56,15 @@ public class Maze
     public void solve(int x, int y) {
 
 	try {
-	    Thread.sleep(50);
+	    Thread.sleep(25);
 	} catch (Exception e) {
 	}
-	if (board[x][y]==wall || board[x][y]==me || board[x][y]==visited) {
+	if (board[x][y]==wall || board[x][y]==me || board[x][y]==visited || solved)
 	    return;
 	}
 	if (board[x][y]==exit) {
-	    System.out.println(this);
-	    System.exit(0);
+	    System.out.println(this); 
+	    solved=true;
 	}
 	System.out.println(this);
 	board[x][y]=me;
@@ -71,7 +72,9 @@ public class Maze
 	solve(x-1,y);
 	solve(x,y-1);
 	solve(x,y+1);
-	board[x][y]=visited;
+	if (!solved) {
+	    board[x][y]=visited;
+	}
     }
     public static void main(String[] args){
 	Maze m = new Maze();
