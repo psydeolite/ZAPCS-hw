@@ -7,12 +7,16 @@ public class KnightsTour {
     private int maxY;
    
     public KnightsTour() {
-	maxX=5;
-	maxY=5;
-	board=new int[5][5];
+	maxX=8;
+	maxY=8;
+	board=new int[maxX][maxY];
 	for (int y=0;y<maxY;y++) {
 	    for (int x=0;x<maxX;x++) {
-		board[x][y]=00;
+		if (x<2 || y<2 || x>5 || y>5) {
+		    board[x][y]=-1;
+		} else {
+		    board[x][y]=00;
+		}
 	    }
 	}
     }
@@ -28,7 +32,9 @@ public class KnightsTour {
 	return s;
     }
 
-    private void joust(int x, int y) {}
+    private void joust(int x, int y) {
+	
+    }
 
     public static void main(String[] args) {
 	KnightsTour kt=new KnightsTour();
