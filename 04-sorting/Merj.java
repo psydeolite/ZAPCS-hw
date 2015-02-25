@@ -22,4 +22,5 @@ public class Merj {
 	    b.add(s);
 	}
 	System.out.println(m.merge(a,b));
+    }
 }
