@@ -13,5 +13,13 @@ public class Merj {
 
     public static void main(String[] args) {
 	Merj m=new Merj();
-	
+	ArrayList<Integer> a=new ArrayList<Integer>();
+	ArrayList<Integer> b=new ArrayList<Integer>();
+	for (int i=0;i<5;i++) {
+	    a.add(i);
+	}
+	for (int s=9;s<23;s++) {
+	    b.add(s);
+	}
+	System.out.println(m.merge(a,b));
 }
