@@ -23,7 +23,7 @@ public class Merj {
     public ArrayList<Integer> mergesort(ArrayList<Integer> sortee) {
 	ArrayList<Integer> one=new ArrayList<Integer>();
 	ArrayList<Integer> two=new ArrayList<Integer>();
-	if (sortee.size()==1) {
+	if (sortee.size()<=1) {
 	    return sortee;
 	} else {
 	    int mid=(sortee.size())/2;
