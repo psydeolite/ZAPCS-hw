@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Select {
     private Random r=new Random();
-    private ArrayList<Integer> array;
+    /*private ArrayList<Integer> array;
     public Select() {
 	array=new ArrayList<Integer>();
 	array.add(3);
@@ -29,7 +29,24 @@ public class Select {
 	    return selectHelp(k, start, (start+end)/2);
 	}
     }
-		       
+    */
+
+    public void swap(ArrayList<Integer> array, int ind1, int ind2) {
+	int one=array.get(ind1);
+	int two=array.get(ind2);
+	array.set(ind1,two);
+	array.set(ind2, one);
+    }
+    
+    public int selectHelp(ArrayList<Integer> array, int k, int L, int H) {
+	int pval=array.get(L);
+	swap(array, L, H);
+	int Li=L;
+	int Hi=H-1;
+	while (){}
+    }
+	
+	
     public int select(int k) {
 	if (k>array.size()) {
 	    System.out.println("Invalid k value");
