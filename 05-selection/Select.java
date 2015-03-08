@@ -3,60 +3,52 @@ import java.io.*;
 
 public class Select {
     private Random r=new Random();
-    /*private ArrayList<Integer> array;
+    public int[] array;
     public Select() {
-	array=new ArrayList<Integer>();
-	array.add(3);
-	array.add(6);
-	array.add(1);
-	array.add(9);
-	array.add(25);
-	array.add(5);
+	array=new int[]{3,6,1,9,25,5};
     }
 
-    public int selectHelp(int k, int start, int end) {
-	int ref=r.nextInt(end)+start;
-	ArrayList<Integer> newlist=new ArrayList<Integer>();
-	newlist.add(ref);
-	for (int i=0; i<end;i++) {
-	    //go through the list and do the selection/swapping
-	}
-	if (newlist.indexOf(ref)==k || start>=end) {
-	    return ref;
-	} else if (newlist.indexOf(ref)<k) {
-	    return selectHelp(k, (start+end)/2, end);
-	} else {
-	    return selectHelp(k, start, (start+end)/2);
-	}
-    }
-    */
-
-    public void swap(ArrayList<Integer> array, int ind1, int ind2) {
-	int one=array.get(ind1);
-	int two=array.get(ind2);
-	array.set(ind1,two);
-	array.set(ind2, one);
+    public void swap(int[] array, int ind1, int ind2) {
+	int one=array[ind1];
+	int two=array[ind2];
+	array[ind1]=two;
+	array[ind2]=one;
     }
     
-    public int selectHelp(ArrayList<Integer> array, int k, int L, int H) {
-	int pval=array.get(L);
-	swap(array, L, H);
-	int Li=L;
-	int Hi=H-1;
-	while (){}
-    }
-	
-	
-    public int select(int k) {
-	if (k>array.size()) {
-	    System.out.println("Invalid k value");
-	    return 0; //temporary
+    public int select(int[] ar,int k, int low, int high) {
+	int li=low;
+	int hi=high-1;
+	int pval=ar[low];
+	System.out.println("low: "+low+", high: "+high);
+	swap(ar, low, high);
+	while (li<hi) {
+	    if (ar[li]<pval) {
+		li++;
+	    } else {
+		swap(ar, li, hi);
+		hi--;
+	    }
 	}
-	return selectHelp(k, 0, array.size());
+	swap(ar, li, high);
+	if (li<k) {
+	    pval=select(ar,k, li+1,high);
+	} else if (li>k) {
+	    pval=select(ar,k,low,hi-1);
+	} 
+	return pval;
     }
 
+    public int select(int[] ar, int k) {
+	return select(ar,k,0,ar.length-1);
+    }
+    public void delay() {
+	try {
+	    Thread.sleep(3000);
+	} catch (Exception e) {}
+    }
+	
     public static void main(String[] args) {
 	Select s=new Select();
-	s.select(3);
+	System.out.println(s.select(s.array, 2));
     }
 }
