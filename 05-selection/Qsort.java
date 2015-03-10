@@ -58,13 +58,11 @@ public class Qsort{
     }
 
     public void qsort(int[] a, int l, int h) {
+	if (l>=h) 
+	    return;
 	int pi=partition(a,l,h);
-        if (pi-1>l) {
-	    qsort(a,l,pi-1);
-	}
-	if (h-pi>l) {
-	    qsort(a,pi+1,h);
-	}
+	qsort(a,l,pi-1);
+	qsort(a,pi+1,h);
     }
 
     public void qsort(int[] a) {
