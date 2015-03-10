@@ -1,12 +1,13 @@
 import java.util.*;
 import java.io.*;
-public class Qselect{
+public class Qsort{
     private int[] a,b;
     Random rnd = new Random();
-    public Qselect(){
+    public Qsort(){
 	this(20);
     }
-    public Qselect(int n){
+
+    public Qsort(int n){
 	Random r = new Random();
 	a = new int[n];
 	for (int i = 0; i < a.length; i++) {
@@ -56,12 +57,23 @@ public class Qselect{
 	return (wall+rwall)/2;
     }
 
-		
+    public void qsort(int[] a, int l, int h) {
+	int pi=partition(a,l,h);
+        if (pi-1>l) {
+	    qsort(a,l,pi-1);
+	}
+	if (h-pi>l) {
+	    qsort(a,pi+1,h);
+	}
+    }
+
+    public void qsort(int[] a) {
+	qsort(a,0,a.length-1);
+    }
 		
     public int qselect(int[] a, int k, int l, int h){
 	int pi,pval;
-	int[] rarray;
-	pi = partition(a,l,h);
+      	pi = partition(a,l,h);
 	pval = a[pi];
 	if (k==pi)
 	    return pval;
@@ -77,14 +89,15 @@ public class Qselect{
     }
 		
     public static void main(String[] args) {
-	Qselect q = new Qselect();
+	Qsort q = new Qsort();
 	System.out.println(q);
-	for (int i=0;i<5;i++) {
+	/*for (int i=0;i<5;i++) {
 	    System.out.print(q.select(i)+" ");
 	}
 	System.out.println();
 	Arrays.sort(q.a);
+	System.out.println(q);*/
+	q.qsort(q.a);
 	System.out.println(q);
-
     }
 }
