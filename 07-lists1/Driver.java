@@ -6,9 +6,10 @@ public class Driver {
 	franz.add("<3");
 	franz.add("i");
 	System.out.println(franz);
-	System.out.println(franz.find(3));
-	franz.insert(1,"really");
+	System.out.println(franz.get(3));
+	franz.add(1,"really");
 	System.out.println(franz);
+	franz.remove(1);
     }
 
 }
