@@ -5,11 +5,15 @@ public class LList {
     
     public LList() {
 	header=new Node(l);
-	header.setData("header");
+	header.setData(null);
+    }
+
+    public int size() {
+	return len;
     }
     
-    public boolean add(String s){
-	Node tmp = new Node(s);
+    public boolean add(int n){
+	Node tmp = new Node(n);
 	header.setNext(tmp);
 	tmp.setNext(l);
 	l = tmp;
@@ -35,14 +39,14 @@ public class LList {
 	    } 
 	    temp=temp.getNext();
 	}
-	return new Node("Index out of bounds.");
+	return new Node(-404);
     }	
 
-    public String get(int n) {
+    public int get(int n) {
 	return getNodeAt(n).getData();
     }
 
-    public boolean add(int n, String s) {
+    public boolean add(int n, int s) {
 	Node node=new Node(s);
 	node.setNext(getNodeAt(n));
 	getNodeAt(n-1).setNext(node);
@@ -50,11 +54,14 @@ public class LList {
 	return true;
     }
 
-    public boolean remove(int n) {
+    public int remove(int n) {
+	if (n>=this.len || n<0) 
+	    return -404;
 	Node after=getNodeAt(n+1);
 	Node before=getNodeAt(n-1);
+	Node offender=getNodeAt(n);
 	before.setNext(after);
 	len--;
-	return true;
+	return offender.getData();
     }
 }
