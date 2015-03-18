@@ -5,30 +5,31 @@ public class LList {
     
     public LList() {
 	header=new Node(l);
+	header.setData("header");
     }
     
-    public void add(String s){
+    public boolean add(String s){
 	Node tmp = new Node(s);
 	header.setNext(tmp);
 	tmp.setNext(l);
 	l = tmp;
 	len++;
+	return true;
     }
 
     public String toString(){
 	String s = "";
 	Node tmp;
-	for (tmp = l; tmp != null; tmp=tmp.getNext()){
+	for (tmp = header; tmp != null; tmp=tmp.getNext()){
 	    s = s + tmp + " --> ";
 	}
 	s = s + "null";
 	return s;
     }
 
-    public Node getNodeAt(int x) {
-	int n=x+1;
-	Node temp=this.l;
-	for (int i=0;temp!=null;i++) {
+    public Node getNodeAt(int n) {
+	Node temp=this.header;
+	for (int i=-1;temp!=null;i++) {
 	    if (i==n) {
 		return temp;
 	    } 
@@ -41,7 +42,7 @@ public class LList {
 	return getNodeAt(n).getData();
     }
 
-    public void add(int n, String s) {
+    public boolean add(int n, String s) {
 	Node node=new Node(s);
 	if (n==0) {
 	    add(s);
@@ -50,9 +51,14 @@ public class LList {
 	    getNodeAt(n-1).setNext(node);
 	}
 	len++;
+	return true;
     }
 
-    public void remove(int n) {
-	
+    public boolean remove(int n) {
+	Node after=getNodeAt(n+1);
+	Node before=getNodeAt(n-1);
+	before.setNext(after);
+	len++;
+	return true;
     }
 }

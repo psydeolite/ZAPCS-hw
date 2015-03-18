@@ -7,9 +7,11 @@ public class Driver {
 	franz.add("i");
 	System.out.println(franz);
 	System.out.println(franz.get(3));
-	franz.add(1,"really");
+	franz.add("hey");
+	franz.add(2,"really");
 	System.out.println(franz);
-	franz.remove(1);
+	franz.remove(0);
+	System.out.println(franz);
     }
 
 }
