@@ -44,12 +44,8 @@ public class LList {
 
     public boolean add(int n, String s) {
 	Node node=new Node(s);
-	if (n==0) {
-	    add(s);
-	} else {
-	    node.setNext(getNodeAt(n));
-	    getNodeAt(n-1).setNext(node);
-	}
+	node.setNext(getNodeAt(n));
+	getNodeAt(n-1).setNext(node);
 	len++;
 	return true;
     }
@@ -58,7 +54,7 @@ public class LList {
 	Node after=getNodeAt(n+1);
 	Node before=getNodeAt(n-1);
 	before.setNext(after);
-	len++;
+	len--;
 	return true;
     }
 }
