@@ -15,6 +15,9 @@ public class Driver {
 	System.out.println(franz);
 	franz.remove(0);
 	System.out.println(franz);*/
+
+
+	//----------ARRAYLIST
 	ArrayList<Integer> intarray=new ArrayList<Integer>();
 	Random r=new Random();
 	//adds to array
@@ -31,6 +34,7 @@ public class Driver {
 	elapsed=System.currentTimeMillis()-start;
 	System.out.println("Time for intarray sum: "+elapsed+"ms");
 
+	//-----------LLIST
 	LList franz=new LList();
 	//adds to array
 	for (int i=0;i<1000000;i++) {
@@ -45,6 +49,7 @@ public class Driver {
 	elapsed=System.currentTimeMillis()-start;
 	System.out.println("Time for LList sum: "+elapsed+"ms"); 
 
+	//-----------LINKEDLIST
 	LinkedList liszt=new LinkedList();
 	//adds to array
 	for (int i=0;i<1000000;i++) {

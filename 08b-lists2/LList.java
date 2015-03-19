@@ -8,6 +8,11 @@ public class LList {
 	header.setData(null);
     }
 
+    public LLit getLLit() {
+	LLit llit=new LLit();
+	return llit;
+    }
+    
     public int size() {
 	return len;
     }
@@ -31,6 +36,10 @@ public class LList {
 	return s;
     }
 
+    public Node getStart() {
+	return header;
+    }
+    
     public Node getNodeAt(int n) {
 	Node temp=this.header;
 	for (int i=-1;temp!=null;i++) {
@@ -63,5 +72,30 @@ public class LList {
 	before.setNext(after);
 	len--;
 	return offender.getData();
+    }
+
+    public boolean remov(int n) {
+	Node t=header;
+	while (t.getNext()!=null) {
+	    if (t.getNext().getData()==n) {
+		t.setNext(t.getNext().getNext());
+		return true;
+	    }
+	}
+	return false;
+    }
+
+    public boolean pigremove(int n) {
+	Node t=header.getNext();
+	Node t2=header;
+	while (t!=null) {
+	    if (t.getData()==n) {
+		t2.setNext(t.getNext());
+		return true;
+	    }
+	    t2=t;
+	    t=t.getNext();
+	}
+	return false;
     }
 }
