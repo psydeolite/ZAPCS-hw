@@ -16,7 +16,7 @@ public class myArrayStack {
     }
 
     public int pop() {
-	int returnVal=list[len];
+	int returnVal=list[len-1];
 	len--;
 	int[] nlist=new int[len];
 	for (int i=0;i<len;i++) {
@@ -31,7 +31,7 @@ public class myArrayStack {
     }
 
     public int top() {
-	return list[len];
+	return list[len-1];
     }
 
     public String toString() {
