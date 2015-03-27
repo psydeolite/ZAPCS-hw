@@ -12,11 +12,23 @@ public class Queue<E>{
 	if (empty()) first.setNext(temp);
 	last.setNext(temp);
 	last = temp;
+	//moves from first to last
+	/*if (first==null) {
+	    first=temp;
+	    last=temp;
+	} else {
+	    last.setNext(temp);
+	    last=temp;
+	    }*/
     }
     
     public E dequeue(){
 	E retval=first.getNext().getData();
 	first=first.getNext();
+	/*E retval=first.getData();
+	  first=first.getNext();
+	  if (start==null) end=null;
+	*/
 	return retval;
     }
     
