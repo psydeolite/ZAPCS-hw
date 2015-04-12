@@ -10,22 +10,22 @@ public class myQueue<E> {
 	return (end.getNext() == start);
     }
     public void enQueue(Node n){
-	//Node tmp = new Node(x,y);
-	tmp.setNext(n);
+	Node tmp = n;
+	tmp.setNext(end.getNext());
 	end.setNext(tmp);
     }
-    public E deQueue (){
+    public Node deQueue (){
 	Node tmp = end.getNext();
 	Node before = end;
 	while (tmp.getNext() != start) {
 	    tmp = tmp.getNext();
 	    before = before.getNext();
 	}
-	E retval = tmp;
+	Node retval = tmp;
 	before.setNext(start);
 	return retval;
     }
-    public E head(){
+    public Node head(){
 	Node tmp = end.getNext();
 	while (tmp.getNext() != start) {
 	    tmp = tmp.getNext();

@@ -3,11 +3,13 @@ public class Node {
     private int ycor;
     private char sym;
     private Node next;
+    private Node prev;
     
     public Node(){
 	xcor = 0;
 	ycor = 0;
 	next = null;
+	prev=null;
 	sym = 'A';
     }
     public Node(int x, int y){
@@ -17,11 +19,12 @@ public class Node {
 	sym='A';
     }
 
-    public Node(int x, int y, char c) {
+    public Node(int x, int y, char c, Node p) {
 	xcor=x;
 	ycor=y;
 	sym=c;
 	next=null;
+	prev=p;
     }
 
     public void setxy(int x, int y){
@@ -48,8 +51,11 @@ public class Node {
     public Node getNext(){
 	return next;
     }
+    public Node getPrev() {
+	return prev;
+    }
     public String toString(){
-	return ""+xcor+","+ycor;
+	return ""+xcor+","+ycor+','+sym;
     }
 
 }
