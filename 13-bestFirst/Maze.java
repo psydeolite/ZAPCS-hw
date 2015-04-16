@@ -17,54 +17,36 @@ public class Maze
     private Frontier f;
 		
     public void delay(int n){
-	try {
-	    Thread.sleep(n);
-	} catch (Exception e) {}
+	try {Thread.sleep(n);} catch (Exception e) {}
     }
 		
-    public Maze() 
-    {
+    public Maze() {
 	maxX=40;
 	maxY=20;
 	board = new char[maxX][maxY];
-				
 	try {
-						
 	    Scanner sc = new Scanner(new File("maze.dat"));
 	    int j=0;
-	    while (sc.hasNext())
-		{
-		    String line = sc.nextLine();
-		    for (int i=0;i<maxX;i++)
-			{
-			    board[i][j] = line.charAt(i);
-			}
-		    j++;
+	    while (sc.hasNext()){
+		String line = sc.nextLine();
+		for (int i=0;i<maxX;i++){
+		    board[i][j] = line.charAt(i);
 		}
-	}
-	catch (Exception e)
-	    {
+		j++;
 	    }
-				
+	} catch (Exception e){}	
     }
 		
-    public String toString()
-    {
+    public String toString(){
 	String s = "[2J\n";
-				
-	for (int y=0;y<maxY;y++)
-	    {
-		for (int x=0;x<maxX;x++)
-		    s = s +board[x][y];
-		s=s+"\n";
-	    }
+	for (int y=0;y<maxY;y++){
+	    for (int x=0;x<maxX;x++)
+		s = s +board[x][y];
+	    s=s+"\n";
+	}
 	return s;
     }
 
-    /*
-      solved - instance variable to indicate we're done
-			
-    */
     public void solve(int x, int y){
 	if (board[x][y]==wall ||
 	    board[x][y]==me ||
@@ -98,8 +80,7 @@ public class Maze
 	    tmp = new Node(tx,ty);
 	    tmp.setPrev(current);
 	    f.add(tmp);
-	}
-						
+	}						
     }
 
     public Node bfsHelper(int x, int y){
@@ -137,17 +118,20 @@ public class Maze
     }
 
     public void bfs(int x,int y) {
-	Node p=bfsHelper(x,y);
+	printSolution(bfsHelper(x,y));
+    }
+
+    public void printSolution(Node n) {
 	for (Node p = current.getPrev(); p != null ; p = p.getPrev()){
 	    board[p.getX()][p.getY()] = 'P';
 	    delay(100);
 	    System.out.println(this);
 	}
     }
-    
+	
     public void bestFirst(int x, int y){
 	PriorityQueue p=new PriorityQueue();
-	Node exitNode=
+	Node exitNode=bfsHelper(x,y);   
 	p.add(new Node(x,y,));
 
 	int tx=0,ty=0;
@@ -168,13 +152,6 @@ public class Maze
 	    addToFront(cx,cy-1,current);
 
 	    delay(50);
-	    System.out.println(this);
-	}
-
-	// path recovery
-	for (Node p = current.getPrev(); p != null ; p = p.getPrev()){
-	    board[p.getX()][p.getY()] = 'P';
-	    delay(100);
 	    System.out.println(this);
 	}
     }
