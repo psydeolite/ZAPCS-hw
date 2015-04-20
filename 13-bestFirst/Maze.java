@@ -83,9 +83,18 @@ public class Maze
 	}						
     }
 
+    public void addToFront(int tx,int ty, Node current, Node exit) {
+	Node tmp = null;
+	if (board[tx][ty]=='#' || board[tx][ty]=='$'){
+	    tmp = new Node(tx,ty,exit);
+	    tmp.setPrev(current);
+	    f.add(tmp);
+	}		
+    }
+
     public Node bfsHelper(int x, int y){
-	//f = new Frontier();
-	f = new StackFront();
+	f = new Frontier();
+	//f = new StackFront();
 	Node exitNode=null;
 	f.add(new Node(x,y));
 
@@ -96,9 +105,10 @@ public class Maze
 	    int cx = current.getX();
 	    int cy = current.getY();
 
-	    if (board[cx][cy]=='$')
+	    if (board[cx][cy]=='$') {
 		exitNode=current;
 		break;
+	    }
 						
 	    board[cx][cy]='z';
 
@@ -107,8 +117,8 @@ public class Maze
 	    addToFront(cx,cy+1,current);
 	    addToFront(cx,cy-1,current);
 
-	    delay(50);
-	    System.out.println(this);
+	    //delay(50);
+	    //System.out.println(this);
 	}
 
 	// path recovery
@@ -122,7 +132,7 @@ public class Maze
     }
 
     public void printSolution(Node n) {
-	for (Node p = current.getPrev(); p != null ; p = p.getPrev()){
+	for (Node p = n.getPrev(); p != null ; p = p.getPrev()){
 	    board[p.getX()][p.getY()] = 'P';
 	    delay(100);
 	    System.out.println(this);
@@ -132,12 +142,12 @@ public class Maze
     public void bestFirst(int x, int y){
 	PriorityQueue p=new PriorityQueue();
 	Node exitNode=bfsHelper(x,y);   
-	p.add(new Node(x,y,));
-
+	p.add(new Node(x,y,exitNode));
+	System.out.println(p);
 	int tx=0,ty=0;
-	Node current = null;
+	Node current=null;
 	while (!p.isEmpty()){
-	    current = f.remove();
+	    current = p.Eremove();
 	    int cx = current.getX();
 	    int cy = current.getY();
 
@@ -146,20 +156,21 @@ public class Maze
 						
 	    board[cx][cy]='z';
 
-	    addToFront(cx+1,cy,current);
-	    addToFront(cx-1,cy,current);
-	    addToFront(cx,cy+1,current);
-	    addToFront(cx,cy-1,current);
+	    addToFront(cx+1,cy,current,exitNode);
+	    addToFront(cx-1,cy,current,exitNode);
+	    addToFront(cx,cy+1,current,exitNode);
+	    addToFront(cx,cy-1,current,exitNode);
 
 	    delay(50);
 	    System.out.println(this);
 	}
+	printSolution(current);
     }
 
     public static void main(String[] args){
 	Maze m = new Maze();
 	System.out.println(m);
-	m.bfs(1,1);
+	m.bestFirst(1,1);
 	System.out.println(m);
 		
     }
