@@ -14,23 +14,21 @@ public class Tree {
 	Node t=root;
 	while (t!=null) {
 	    System.out.println("loop");
-	    int c=t.getData()-i;
-	    if (c==0) return t;
-	    else if (c<0) t=t.getLeft();
-	    else t=t.getRight();
+	    if (t.getData()==i) return t;
+	    else if (t.getData()<i) t=t.getRight();
+	    else t=t.getLeft();
 	}
-	return null;
+       	return t;
     }
 
     public Node search(Node t, int i) {
 	if (t!=null) {
-	    int c=t.getData()-i;
-	    if (c==0) 
+	    if (t.getData()==i) 
 		return t;
-	    else if (c<0) 
-		return search(t.getLeft(),i);
-	    else 
+	    else if (t.getData()<i) 
 		return search(t.getRight(),i);
+	    else 
+		return search(t.getLeft(),i);
 	}
 	return t;
     }
@@ -48,32 +46,30 @@ public class Tree {
 	    Node n1=null;
 	    Node n2=root;
 	    while (n2!=null) {
-		int c=n2.getData()-i;
-		n1=n2;
-		if (c<0) {
+		if (n2.getData()<i) {
+		    n1=n2;
 		    n2=n2.getRight();
 		} else {
+		    n1=n2;
 		    n2=n2.getLeft();
 		}
 	    }
-	    int c2=n1.getData()-i;
-	    if (c2>0) n1.setRight(toInsert);
+	    if (n1.getData()<i) n1.setRight(toInsert);
 	    else n1.setLeft(toInsert);
 	}
     }
 
     public void insert(Node t, int i) {
 	Node toInsert=new Node(i);
+	System.out.println(t);
 	if (t==null) {
-	    return;
+	    //toInsert;
+	    System.out.println(t);
 	} else {
-	    int c=t.getData()-i;
-	    if (c>0) {
-		insert(t.getRight(), i);
-		t.setRight(toInsert);
-	    } else {
+	    if (t.getData()>i) {
 		insert(t.getLeft(), i);
-		t.setLeft(toInsert);
+	    } else {
+		insert(t.getRight(), i);
 	    }
 	}
     }
@@ -81,13 +77,29 @@ public class Tree {
     public void rinsert(int i) {
 	insert(root, i);
     }
-		
+	     
+    //close enough, right
+    public String toStringHelp(Node n) {
+	if (n==null) 
+	    return "";
+	else 
+	    return n.toString()+"\n"+toStringHelp(n.getLeft())+"     " +toStringHelp(n.getRight());
+    }
+
+    public String toString() {
+	return toStringHelp(root);
+    }
+
     public static void main(String[] args) {
 	Tree arbre=new Tree();
-	arbre.insert(3);
-	arbre.insert(1);
-	arbre.insert(5);
-	System.out.println(arbre.search(5));
+	System.out.println(arbre);
+	arbre.rinsert(3);
+	System.out.println(arbre);
+	arbre.rinsert(1);
+	System.out.println(arbre);
+	arbre.rinsert(5);
+	System.out.println(arbre);
+	System.out.println(arbre.search(1));
     }
 		
 
