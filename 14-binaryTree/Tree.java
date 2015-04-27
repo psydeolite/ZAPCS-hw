@@ -1,7 +1,10 @@
+import java.util.*;
+import java.io.*;
 
 public class Tree {
     private Node root;
     private int length=0;
+    private int level;
     public Tree(Node n) {
 	root=n;
     }
@@ -13,7 +16,6 @@ public class Tree {
     public Node search(int i) {
 	Node t=root;
 	while (t!=null) {
-	    System.out.println("loop");
 	    if (t.getData()==i) return t;
 	    else if (t.getData()<i) t=t.getRight();
 	    else t=t.getLeft();
@@ -42,7 +44,6 @@ public class Tree {
 	if (root==null) {
 	    root=toInsert;
 	} else {
-	    System.out.println("inserting");
 	    Node n1=null;
 	    Node n2=root;
 	    while (n2!=null) {
@@ -61,15 +62,20 @@ public class Tree {
 
     public void insert(Node t, int i) {
 	Node toInsert=new Node(i);
-	System.out.println(t);
+	//System.out.println(t);
 	if (t==null) {
-	    //toInsert;
-	    System.out.println(t);
+	    t=toInsert;
+	    //System.out.println(t);
 	} else {
 	    if (t.getData()>i) {
+		//System.out.println("not null");
 		insert(t.getLeft(), i);
+		t.setLeft(toInsert);
+		//System.out.println("setleft");
 	    } else {
 		insert(t.getRight(), i);
+		t.setRight(toInsert);
+		//System.out.println("setright");
 	    }
 	}
     }
@@ -77,29 +83,31 @@ public class Tree {
     public void rinsert(int i) {
 	insert(root, i);
     }
-	     
+
+    public boolean isLeaf(Node n) {
+	return (n.getLeft()==null && n.getRight()==null);
+    }
+    
     //close enough, right
-    public String toStringHelp(Node n) {
+    public String traverse(Node n) {
 	if (n==null) 
 	    return "";
 	else 
-	    return n.toString()+"\n"+toStringHelp(n.getLeft())+"     " +toStringHelp(n.getRight());
+	    return n.toString()+"\n"+traverse(n.getLeft())+"  " +traverse(n.getRight());
     }
 
     public String toString() {
-	return toStringHelp(root);
+	return traverse(root);
     }
 
     public static void main(String[] args) {
 	Tree arbre=new Tree();
+	Random r=new Random();
+	for (int i=0;i<20;i++) {
+	    arbre.insert(r.nextInt(30));
+	}
 	System.out.println(arbre);
-	arbre.rinsert(3);
-	System.out.println(arbre);
-	arbre.rinsert(1);
-	System.out.println(arbre);
-	arbre.rinsert(5);
-	System.out.println(arbre);
-	System.out.println(arbre.search(1));
+	
     }
 		
 
