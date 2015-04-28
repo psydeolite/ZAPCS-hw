@@ -93,7 +93,7 @@ public class Tree {
 	if (n==null) 
 	    return "";
 	else 
-	    return n.toString()+"\n"+traverse(n.getLeft())+"  " +traverse(n.getRight());
+	    return traverse(n.getLeft())+" "+n+" "+traverse(n.getRight());
     }
 
     public String toString() {
@@ -104,6 +104,7 @@ public class Tree {
 	Tree arbre=new Tree();
 	Random r=new Random();
 	for (int i=0;i<20;i++) {
+	   
 	    arbre.insert(r.nextInt(30));
 	}
 	System.out.println(arbre);
