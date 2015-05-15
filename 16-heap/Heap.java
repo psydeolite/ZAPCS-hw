@@ -17,7 +17,15 @@ public class Heap {
 	}
     }
 
-    public removeMin
+    public int removeMin() {
+	int removed=ar[0];
+	ar[0]=ar[length-1];
+	ar[length-1]=0;
+	for (int i=0;i<length;i++) {
+	    pushDown();
+	}
+	return removed;
+    }
 
     public void pushDown(){
 	for (int i=0; (2*i)+1<length;i++) {
