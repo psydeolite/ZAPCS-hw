@@ -1,0 +1,9 @@
+Dijkstra's Algorithm
+
+single source shortest path algorithm
+finds shortest path to every other node in the graph
+
+1) add new node n with lowest cost to the solution set
+2) for each node not in the solution set, the cost = min(current cost,cost from n+cost from n to the node)
+
+uses priority queue, array-based heap 
